@@ -11,13 +11,17 @@ TablaDeInstancias = [((3,6),(11,20))]#, ((7,11),(11,20)),
 
 #EmisionesPorOperacion = random.randint(20,70) Usar si es que fueran globales
 
-MatricesDeCostos = []
-MatricesDeEmisiones = []
+MatricesDeCostosDeInstalacion = []
+MatricesDeEmisionesOperacionales = []
 MatricesDeCapacidades = []
+MatricesDeDistancias = []
+ListaIJ = []
 
 for (t1,t2) in TablaDeInstancias:
     TamañoUbicacionesPosibles = random.randint(t1[0],t1[1])
     TamañoTiendasYaInstaladas = random.randint(t2[0],t2[1])
+
+    print(TamañoTiendasYaInstaladas)
 
 
     #Genera las |J| tiendas ya instaladas
@@ -31,12 +35,11 @@ for (t1,t2) in TablaDeInstancias:
 
     #Ahora hay que calcular h_ij, el peso total de x_ij, i.e. de asignar i a j
     Distancia = np.zeros((337500,TamañoTiendasYaInstaladas))
-    CostoInst = np.zeros((337500,TamañoTiendasYaInstaladas)) 
-    EmisOper = np.zeros((337500,TamañoTiendasYaInstaladas)) 
-
-    Capacidad = np.zeros((337500,TamañoTiendasYaInstaladas)) #337500 = 600^2-150^2
-    EmisionesTotales = np.zeros((337500,TamañoTiendasYaInstaladas))
-    CostosTotales = np.zeros((337500,TamañoTiendasYaInstaladas))
+    CostoInstalacion = np.zeros(337500) 
+    EmisionesOperacion = np.zeros((337500,TamañoTiendasYaInstaladas)) 
+    Capacidad = np.zeros(337500)
+    
+    #337500 = 600^2-150^2
 
     i = 1
     for x in range(1,600+1,1):
@@ -44,21 +47,25 @@ for (t1,t2) in TablaDeInstancias:
             j=1
             if (abs(x-300.5)>=75.5) or (abs(y-300.5)>=75.5): #i.e., están en la zona verde (contiene a la celeste)
                 for z in TiendasYaInstaladas:
-                    if (abs(x-300.5)>=200.5) or (abs(y-300.5)>=200.5): #i.e., están en la zona celeste
-                        CostoInst[i-1][j-1] = random.randint(1000,1500)
-                    else:                                              #i.e., estamos en la zona verde
-                        CostoInst[i-1][j-1] = random.randint(1500,4000)
+                    if y > 1:
+                        
+                        if (abs(x-300.5)>=200.5) or (abs(y-300.5)>=200.5): #i.e., están en la zona celeste
+                            CostoInstalacion[i-1] = random.randint(1000,1500)
+                        else:                                              #i.e., estamos en la zona verde
+                            CostoInstalacion[i-1] = random.randint(1500,4000)
+                        
+                        Capacidad[i-1] = random.randint(2,TamañoTiendasYaInstaladas//2)
                     
                     Distancia[i-1][j-1] = ((x-z[0])**2+(y-z[1])**2)**(1/2)
-                    Capacidad[i-1][j-1] = random.randint(2,TamañoTiendasYaInstaladas//2)
-                    EmisOper[i-1][j-1] = random.randint(20,70)
+                    EmisionesOperacion[i-1][j-1] = random.randint(20,70)
 
-                    CostosTotales[i-1][j-1] = 1.25*Distancia[i-1][j-1] + CostoInst[i-1][j-1]
-                    EmisionesTotales[i-1][j-1] = EmisOper[i-1][j-1] + 1.5*Distancia[i-1][j-1]
                     j+=1
                 i+=1
-    
-    Matrices
-    MatricesDeCostos.append(CostosTotales)
-    MatricesDeEmisiones.append(EmisionesTotales)
-    #print(MatricesDeCostos)
+    MatricesDeCostosDeInstalacion.append(CostoInstalacion)
+    MatricesDeEmisionesOperacionales.append(EmisionesOperacion)
+    MatricesDeCapacidades.append(Capacidad)
+    MatricesDeDistancias.append(Distancia)
+    ListaIJ.append((TamañoUbicacionesPosibles,TamañoTiendasYaInstaladas))
+   
+    for i in MatricesDeCapacidades[0]:
+        print(i)
