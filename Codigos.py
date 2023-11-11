@@ -21,8 +21,6 @@ for (t1,t2) in TablaDeInstancias:
     TamañoUbicacionesPosibles = random.randint(t1[0],t1[1])
     TamañoTiendasYaInstaladas = random.randint(t2[0],t2[1])
 
-    print(TamañoTiendasYaInstaladas)
-
 
     #Genera las |J| tiendas ya instaladas
     TiendasYaInstaladas = []
@@ -67,5 +65,3 @@ for (t1,t2) in TablaDeInstancias:
     MatricesDeDistancias.append(Distancia)
     ListaIJ.append((TamañoUbicacionesPosibles,TamañoTiendasYaInstaladas))
    
-    for i in MatricesDeCapacidades[0]:
-        print(i)
