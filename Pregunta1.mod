@@ -9,8 +9,8 @@ param d{i in I, j in J}; 	#distancia de i a j
 param O{i in I}; 			#emisiones por operación
 param C{i in I};			#Capacidad de lugar i
 
-var X{i in I, j in J};
-var Y{i in I};
+var X{i in I, j in J} binary;
+var Y{i in I} binary;
 
 ########################################################################################
 
@@ -22,6 +22,4 @@ minimize FO:
 
 s.t. a		{i in I}: 	sum{j in J}X[i,j] <= C[i]Y[i];
 s.t. b					sum{i in I, j in J}(1.25*d[i,j]*X[i,j]) + sum{i in I}(CI[i]*Y[i]) <= 6000*cardJ;
-s.t. c		{j in J}:	sum{i in I} X[i,j] = 1;			#Unicidad al satisfacer la demanda
-s.t. d					sum{i in I}Y[i] = cardI;		#Satisfacción de demanda
-s.t. e 		{i in I}:	y[i] <= sum{j in J}X[i,j];
+s.t. c		{j in J}:	sum{i in I} X[i,j] = 1;			#Satisfacción de demanda por único elemento
