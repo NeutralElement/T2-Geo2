@@ -15,8 +15,8 @@ for i in range(1,9,1):
 
 
 
-TablaDeInstancias = [((3,6),(11,20)), ((7,11),(11,20)), 
-                    ((12,15),(11,20)), ((12,15),(20,29))] 
+TablaDeInstancias = [((3,6),(11,20))]#, ((7,11),(11,20)), 
+                    #((12,15),(11,20)), ((12,15),(20,29))] 
                     #((15,18),(20,29)),((19,23),(20,29)),
                     #((19,23),(26,35)),((24,28),(26,35))]
 
@@ -82,7 +82,7 @@ for (t1,t2) in TablaDeInstancias:
     ListaIJ.append((TamañoUbicacionesPosibles,TamañoTiendasYaInstaladas))
 
 
-def escribir(conjunto, nombre_conjunto):
+def escribir_indexados(conjunto, nombre_conjunto):
     archivo_i.write(nombre_conjunto+':=\n')
     for i, valor in enumerate(conjunto, 1):
         archivo_i.write(f'{i} {valor}\n')
@@ -91,7 +91,12 @@ def escribir(conjunto, nombre_conjunto):
 for i in range (1,CantidadDeInstancias+1,1):
     archivo_i = open(NombresArchivos[i-1], "w")
     
-    archivo_i.write("wola tarola"+str(i)+" "+str(random.randint(1,100)))
-    
-    
+    archivo_i.write("param cardI := "+str(ListaIJ[i-1][0])+";\n")
+    archivo_i.write("param cardJ := "+str(ListaIJ[i-1][1])+";\n\n")
+
+    escribir_indexados(MatricesDeCostosDeInstalacion[i-1], "param CI")
+    escribir_indexados(MatricesDeDistancias[i-1], "param d")
+    escribir_indexados(MatricesDeEmisionesOperacionales[i-1], "param O")
+    escribir_indexados(MatricesDeCapacidades[i-1], "param C" )
+
     archivo_i.close()
