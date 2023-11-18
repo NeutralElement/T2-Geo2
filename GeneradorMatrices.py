@@ -1,10 +1,26 @@
+import os
 import random
 import numpy as np
 
-TablaDeInstancias = [((3,6),(11,20))]#, ((7,11),(11,20)), 
-                    #((12,15),(11,20)), ((12,15),(20,29)), 
+NombresArchivos = []
+
+for i in range(1,9,1):
+    nombre = "instancia_"+str(i)+".dat"
+    NombresArchivos.append(nombre)
+
+for i in range(1,9,1):
+    if os.path.exists(NombresArchivos[i-1]):
+        os.remove(NombresArchivos[i-1])
+
+
+
+
+TablaDeInstancias = [((3,6),(11,20)), ((7,11),(11,20)), 
+                    ((12,15),(11,20)), ((12,15),(20,29))] 
                     #((15,18),(20,29)),((19,23),(20,29)),
                     #((19,23),(26,35)),((24,28),(26,35))]
+
+CantidadDeInstancias = len(TablaDeInstancias)
 
 #CostoInstalacionCeleste = random.randint(1000,1500)
 #CostoInstalacionVerde = random.randint(1500,4000)
@@ -64,4 +80,18 @@ for (t1,t2) in TablaDeInstancias:
     MatricesDeCapacidades.append(Capacidad)
     MatricesDeDistancias.append(Distancia)
     ListaIJ.append((TamañoUbicacionesPosibles,TamañoTiendasYaInstaladas))
-   
+
+
+def escribir(conjunto, nombre_conjunto):
+    archivo_i.write(nombre_conjunto+':=\n')
+    for i, valor in enumerate(conjunto, 1):
+        archivo_i.write(f'{i} {valor}\n')
+    archivo_i.write(';\n\n')   
+
+for i in range (1,CantidadDeInstancias+1,1):
+    archivo_i = open(NombresArchivos[i-1], "w")
+    
+    archivo_i.write("wola tarola"+str(i)+" "+str(random.randint(1,100)))
+    
+    
+    archivo_i.close()
