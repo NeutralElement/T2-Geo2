@@ -16,10 +16,10 @@ var Y{i in I} binary;
 
 minimize FO:
 				sum{i in I, j in J}(1.5*d[i,j]*X[i,j]) +
-				sum{i in I}(O[i]*Y[i]) 
+				sum{i in I}(O[i]*Y[i]) ;
 ########################################################################################				
 
 
-s.t. a		{i in I}: 	sum{j in J}X[i,j] <= C[i]Y[i];
-s.t. b					sum{i in I, j in J}(1.25*d[i,j]*X[i,j]) + sum{i in I}(CI[i]*Y[i]) <= 6000*cardJ;
+s.t. a		{i in I}: 	sum{j in J}X[i,j] <= C[i]*Y[i];
+s.t. b				:	sum{i in I, j in J}(1.25*d[i,j]*X[i,j]) + sum{i in I}(CI[i]*Y[i]) <= 6000*cardJ;
 s.t. c		{j in J}:	sum{i in I} X[i,j] = 1;			#Satisfacción de demanda por único elemento
