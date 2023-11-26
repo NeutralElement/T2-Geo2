@@ -1,0 +1,18 @@
+reset;
+model Pregunta2.mod;
+option solver gurobi;
+
+for{j in {1..8}}{
+    printf ("####################   CASO "&j&"   ####################");
+    data ("instancia_"&j&".dat");
+    solve;
+    
+    printf "Funcion Objetivo:\n";
+    display FO;
+    #display X;
+    #display Y;
+    display cardI;
+    display cardJ;
+
+    reset data;
+}
