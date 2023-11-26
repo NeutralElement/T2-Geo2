@@ -7,23 +7,23 @@ display FO;
 var s integer := 0;
 
 for{w in K}{
-    printf ("####################   Solución Vehiculo K   ####################\n");
+    #printf ("####################   Solución Vehiculo K   ####################\n");
     let s := 0;
+    printf"M[%d] = [", w-1;
     for {i in N, j in N: j!=i} {
     	if X[i,j,w] = 1 then{
-    		printf "X[%d, %d, %d] = %g\n", i, j, w, X[i, j, w];
+    		#printf "X[%d, %d, %d] = %g\n", i, j, w, X[i, j, w];
+    		if s = 0 then
+    			printf "(%d, %d)", i,j;
+    		if s > 0 then 
+    			printf ", (%d, %d)", i,j;
     		let s := s+1;
+    		if s mod 5 = 0 then
+    			printf "\n";
     		}
 	}
-    printf("\n");
-    printf(s);
+	printf("]");
+    #printf("\n");
+    #printf(s);
 	printf("\n");
-    #printf "Funcion Objetivo:\n";
-    #display FO;
-    #display X;
-    #display Y;
-    #display cardI;
-    #display cardJ;
-
-    #reset data;
 }

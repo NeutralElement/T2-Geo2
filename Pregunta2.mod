@@ -27,5 +27,13 @@ s.t. EliminarSubTur	 {i in N, j in N, k in K: i!=17 and j!=17 and j!=i}:	U[i,k] 
 s.t. MadridDublin							: sum{k in K} (X[13,8,k] + X[8,13,k]) = 0;
 s.t. MoscuSPB_Kiev							: sum{k in K} (X[15,11,k] + X[20,11,k]) = 0;
 s.t. Kiev_BerlinHamb						: sum{k in K, j in N: j!=3 and j!=9 and j!= 11} X[11,j,k] = 0;
+	#Berlin = 3
+	#Dublin = 8
+	#Hamburgo = 9
+	#kiev = 11 
+	#Madrid = 13
+	#Moscu = 15
+	#SPB = 20
+
 
 s.t. DistanciaTotalRecorrida	     	   			  : D = sum{i in N, j in N, k in K: i!=j}(X[i,j,k]*d[i,j]);
