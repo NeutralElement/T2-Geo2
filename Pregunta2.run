@@ -7,16 +7,15 @@ display FO;
 var s integer := 0;
 
 for{w in K}{
-    printf ("####################   Solución Vehiculo K   ####################");
-    #data ("instancia_"&j&".dat");
-    #solve;
+    printf ("####################   Solución Vehiculo K   ####################\n");
     let s := 0;
     for {i in N, j in N: j!=i} {
-    if X[i,j,w] = 1 then{
-    	printf "X[%d, %d, %d] = %g\n", i, j, w, X[i, j, w];
-    	let s := s+1;}
+    	if X[i,j,w] = 1 then{
+    		printf "X[%d, %d, %d] = %g\n", i, j, w, X[i, j, w];
+    		let s := s+1;
+    		}
 	}
-	printf("\n");
+    printf("\n");
     printf(s);
 	printf("\n");
     #printf "Funcion Objetivo:\n";
