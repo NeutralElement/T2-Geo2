@@ -1,18 +1,30 @@
 reset;
 model Pregunta2.mod;
 option solver gurobi;
+data Pregunta2.dat;
+solve;
+display FO;
+var s integer := 0;
 
-for{j in {1..8}}{
-    printf ("####################   CASO "&j&"   ####################");
-    data ("instancia_"&j&".dat");
-    solve;
-    
-    printf "Funcion Objetivo:\n";
-    display FO;
+for{w in K}{
+    printf ("####################   Solución Vehiculo K   ####################");
+    #data ("instancia_"&j&".dat");
+    #solve;
+    let s := 0;
+    for {i in N, j in N: j!=i} {
+    if X[i,j,w] = 1 then{
+    	printf "X[%d, %d, %d] = %g\n", i, j, w, X[i, j, w];
+    	let s := s+1;}
+	}
+	printf("\n");
+    printf(s);
+	printf("\n");
+    #printf "Funcion Objetivo:\n";
+    #display FO;
     #display X;
     #display Y;
-    display cardI;
-    display cardJ;
+    #display cardI;
+    #display cardJ;
 
-    reset data;
+    #reset data;
 }
