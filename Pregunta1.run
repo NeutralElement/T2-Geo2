@@ -3,16 +3,12 @@ model Pregunta1.mod;
 option solver gurobi;
 
 for{j in {1..8}}{
-    printf ("####################   CASO "&j&"   ####################");
-    data ("instancia_"&j&".dat");
-    solve;
-    
-    printf "Funcion Objetivo:\n";
-    display FO;
-    display X;
-    display Y;
-    display cardI;
-    display cardJ;
-
-    reset data;
+    printf ("###   CASO "&j&"   ###");  #
+    data ("instancia_"&j&".dat");       #   Este for simplemente resuelve las 8 instancias
+    solve;                              #   generadas por el archivo GeneradorMatricesDef.py,
+                                        #   tal y como son generadas. Además, muestra el valor
+    printf "Funcion Objetivo:\n";       #   de la FO.
+    display FO;                         #
+                                        #
+    reset data;                         #
 }
